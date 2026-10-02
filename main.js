@@ -110,6 +110,11 @@ class RRTNode {
     }
 }
 
+function projection(nodeOne, nodeTwo, nodeThree){
+    return ((nodeOne.x -nodeTwo.x)*(nodeThree.x -nodeTwo.x) + (nodeOne.y -nodeTwo.y)*(nodeThree.y -nodeTwo.y))/(kPathLength*kPathLength);
+}
+
+
 function runAlgorithm(iterations) {
 const root = new RRTNode(startPoint.x, startPoint.y, null, 0);
 for (let i = 0; i < iterations; i++){
@@ -137,6 +142,7 @@ for (let i = 0; i < iterations; i++){
         }
     }
     
+    
     if (lowestCost){
         nearestItem = lowestCost;
     }
@@ -158,6 +164,12 @@ for (let i = 0; i < iterations; i++){
     }
     if (lowestCost && !collides){
         for (const item of nearby) {
+            if (item.node.parent != null){
+                ///pathsmoothing
+                if (projection(item.node, nearestItem.node, nearestItem.node.parent) < 0.7 && projection(item.node, nearestItem.node, nearestItem.node.parent) > -0.7){
+                    continue;
+                }
+            }
             if (item.node.cost > nearestItem.cost+ Math.sqrt(Math.pow(item.node.x-nearestItem.x,2) + Math.pow(item.node.y-nearestItem.y,2))) {
                 item.node.parent.eraseChild(item.node);
                 item.node.parent = nearestItem.node;
@@ -260,5 +272,7 @@ runButton.addEventListener("click", () => {
     runAlgorithm(iterations);
     setupMessage.value = "Run complete.";
 });
+
+
 
 
