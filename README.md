@@ -21,5 +21,5 @@ Uses of other peoples' material or artificial intelligence:
 - I used the RBush library to performantly find collisions and the nearest nodes to given points
 - I used artificial intelligence for UI generation (Raptor Mini can't do much else).
 
-I may create a Lazy-PRM* algorithm and compare the results of the two. I recently read a paper by Kris Hauser and he made a compelling case for Lazy-PRM* being comparable in low dimensions but showed that it was drastically faster than RRT* in high dimension spaces.
+I may create a Lazy-PRM* algorithm and compare the results of the two. I recently read a paper by Dr. Kris Hauser and he made a compelling case for Lazy-PRM* being comparable in low dimensions but showed that it was drastically faster than RRT* in high dimension spaces.
 
